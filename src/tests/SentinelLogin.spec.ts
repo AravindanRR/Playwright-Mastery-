@@ -1,13 +1,22 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+import { DashboardPage } from '../pages/DashboardPage'; 
+    
     test('Basic login flow', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const dashboardPage = new DashboardPage(page);
+
     // Navigate to login page
     await page.goto('https://sentinel-qa-fe.service.capbpm.com/sentinel');
-    // Fill in username/email
-    await page.fill('input[placeholder="Enter your email"]', 'QABhaai');
-    // Fill in password
-    await page.fill('input[placeholder="Enter your password"]', 'Bhaai@2026');
-    // Click login button
-    await page.locator('//ion-button[@data-testid="login-submit"]').click();
+    await loginPage.login('QABhaai', 'Bhaai@2026');
+
+    // // Fill in username/email
+    // await page.fill('input[placeholder="Enter your email"]', 'QABhaai');
+    // // Fill in password
+    // await page.fill('input[placeholder="Enter your password"]', 'Bhaai@2026');
+    // // Click login button
+    // await page.locator('//ion-button[@data-testid="login-submit"]').click();
+    
     // Wait for navigation to dashboard
     await page.waitForURL('**/sentinel');
     // Verify successful login
