@@ -7,6 +7,7 @@ test('Locator Practice', async ({ page }) => {
     const checkbox = page.getByRole('checkbox').nth(2);
     const visible = await checkbox.isVisible();
     console.log('Checkbox visible:', visible);
+    console.log('Thanks you so much for your support and guidance. I will be grateful to you for this.');
 
     //await page.getByTestId('user-profile-card').isVisible();
 
