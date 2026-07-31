@@ -1,0 +1,51 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://testautomationpractice.blogspot.com/');
+  await page.getByText('For Selenium, Cypress &').click();
+  await page.locator('#PageList2').getByRole('link', { name: 'Home' }).click();
+  await page.getByRole('textbox', { name: 'Enter Name' }).click();
+  await page.getByRole('textbox', { name: 'Enter EMail' }).click();
+  await page.getByRole('textbox', { name: 'Enter Phone' }).click();
+  await page.getByRole('textbox', { name: 'Address:' }).click();
+  await page.getByRole('radio', { name: 'Female' }).check();
+  await page.getByRole('checkbox', { name: 'Tuesday' }).check();
+  await page.getByRole('checkbox', { name: 'Friday' }).check();
+  await page.getByLabel('Country:').selectOption('germany');
+  await page.getByLabel('Colors:').selectOption('green');
+  await page.getByLabel('Sorted List:').selectOption('cheetah');
+  await page.getByLabel('Sorted List:').selectOption('rabbit');
+  await page.locator('#datepicker').click();
+await page.goto('https://testautomationpractice.blogspot.com/');
+await page.locator('#datepicker').click();
+await page.getByRole('link', { name: '30' }).click();
+await page.locator('#txtDate').click();
+await page.getByRole('link', { name: '31' }).click();
+await expect(page.getByLabel('Sorted List:')).toBeVisible();
+
+await expect(page.getByLabel('Sorted List:')).toMatchAriaSnapshot(`- option "Giraffe" [selected]`);
+  await page.getByRole('link', { name: '30' }).click();
+  await page.locator('#txtDate').click();
+  await page.getByRole('link', { name: '31' }).click()
+  await page.locator('#txtDate').click();
+  await page.getByRole('link', { name: '15' }).click();
+  await page.getByPlaceholder('Start Date').fill('2026-07-30');
+  await page.getByPlaceholder('End Date').fill('2026-07-31');
+  await page.locator('#post-body-1307673142697428135').getByRole('button', { name: 'Submit' }).click();
+  await page.locator('.post-footer-line').first().click();
+  await page.locator('#singleFileInput').setInputFiles('Dummy Test.txt');
+  await page.getByRole('button', { name: 'Upload Single File' }).click();
+  await page.getByText('Single file selected: Dummy').click();
+  await page.getByRole('cell', { name: 'Selenium' }).nth(3).click();
+  await page.getByRole('link', { name: '4', exact: true }).click();
+  await page.getByRole('cell', { name: 'Wireless Mouse' }).click();
+  await page.getByRole('cell').filter({ hasText: /^$/ }).nth(4).click();
+  await page.locator('tr:nth-child(5) > td:nth-child(4) > input').check();
+  await page.locator('#input1').click();
+  await page.locator('#input1').fill('one');
+  await page.locator('#input2').click();
+  await page.locator('#input2').fill('two');
+  await page.locator('#input3').click();
+  await page.locator('#input3').click();
+  await page.locator('#input3').fill('three');
+});
