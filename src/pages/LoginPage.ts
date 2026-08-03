@@ -1,21 +1,16 @@
-import { Locator, Page} from '@playwright/test';
+import { Page, expect } from "@playwright/test";
 
 export class LoginPage {
-  readonly page: Page;
-  readonly usernameInput: Locator;
-  readonly passwordInput: Locator;
-  readonly loginButton: Locator;
 
-  constructor(page: Page) {
-    this.page = page;
-    this.usernameInput = page.locator('input[placeholder="Enter your email"]');
-    this.passwordInput = page.locator('input[placeholder="Enter your password"]');
-    this.loginButton = page.locator('//ion-button[@data-testid="login-submit"]');
-  }
+    constructor(private page: Page) {}
 
-  async login(username: string, password: string) {
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
-  }
+    async navigateToLoginPage() {
+        await this.page.goto('/');
+    }
+
+    async login(username: string, password: string) {
+        await this.page.getByPlaceholder('Username').fill(username);
+        await this.page.getByPlaceholder('Password').fill(password);
+        await this.page.getByRole('button', { name: 'Login' }).click();
+    }
 }
