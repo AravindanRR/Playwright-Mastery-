@@ -1,11 +1,12 @@
-import { test , expect } from '@playwright/test';
+import { Page, expect } from "@playwright/test";
 
 export class DashboardPage {
-  readonly page: any;
-  readonly welcomeMessage: any;
 
-  constructor(page: any) {
-    this.page = page;
-    this.welcomeMessage = page.locator('.welcome-message');
-  }
+    constructor(private page: Page) {}
+
+    async verifyDashboard() {
+         await expect(this.page.getByAltText('client brand banner')).toBeVisible();
+         await expect(this.page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+    
+    }
 }
